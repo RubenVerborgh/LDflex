@@ -1,4 +1,5 @@
 import AsyncIteratorHandler from './AsyncIteratorHandler';
+import { listHandler, containerHandler, collectionHandler } from './CollectionsHandler';
 import DataHandler from './DataHandler';
 import DeleteFunctionHandler from './DeleteFunctionHandler';
 import ExecuteQueryHandler from './ExecuteQueryHandler';
@@ -20,6 +21,7 @@ import SubjectsHandler from './SubjectsHandler';
 import ThenHandler from './ThenHandler';
 import ToArrayHandler from './ToArrayHandler';
 import { termToPrimitive } from './valueUtils';
+import { handler } from './utils';
 
 /**
  * A map with default property handlers.
@@ -31,6 +33,13 @@ export default {
   // Add thenable and async iterable behavior
   then: new ThenHandler(),
   [Symbol.asyncIterator]: new AsyncIteratorHandler(),
+
+  // Add utilities for collections
+  // collection: collectionHandler(),
+  list: listHandler(),
+  container: containerHandler(false),
+  containerAsSet: containerHandler(true),
+  collection: collectionHandler(),
 
   // Add read and query functionality
   get: new GetHandler(),
@@ -74,11 +83,6 @@ export default {
   // Parse a string into an LDflex object
   resolve: new StringToLDflexHandler(),
 };
-
-// Creates a handler from the given function
-function handler(handle) {
-  return { handle };
-}
 
 // Creates a handler for the given RDF/JS Term property
 function termPropertyHandler(property) {

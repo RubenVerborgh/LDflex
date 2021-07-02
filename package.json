@@ -30,11 +30,14 @@
     "@babel/core": "^7.8.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.6",
+    "@comunica/actor-init-sparql-file": "^1.21.3",
+    "@ldflex/comunica": "^3.4.3",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.25.0",
     "eslint-plugin-jest": "^24.3.6",
     "husky": "^6.0.0",
     "jest": "^27.0.3",
+    "n3": "^1.10.0",
     "semantic-release": "^17.4.2"
   },
   "scripts": {

@@ -139,6 +139,15 @@ The path can also continue after the sort:
 will sort the friends based on the label of their country,
 and then return their names.
 
+### Accessing collections
+Handle `rdf:List`, `rdf:Bag`, `rdf:Alt`, `rdf:Seq` and `rdf:Container`.
+```javascript
+(async publication => {
+  const authors = await publication['bibo:authorList'].list;
+})(ordonez_medellin_2014);
+
+```
+
 ## Additional Handlers
 
 The following libraries provide handlers that extend the functionality of LDflex:
@@ -147,5 +156,6 @@ The following libraries provide handlers that extend the functionality of LDflex
 ## License
 ©2018–present
 [Ruben Verborgh](https://ruben.verborgh.org/),
-[Ruben Taelman](https://www.rubensworks.net/).
+[Ruben Taelman](https://www.rubensworks.net/),
+[Jesse Wright](https://github.com/jeswr/).
 [MIT License](https://github.com/LDflex/LDflex/blob/master/LICENSE.md).
