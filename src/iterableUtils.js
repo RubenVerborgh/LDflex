@@ -19,6 +19,24 @@ export function getFirstItem(iterable) {
 }
 
 /**
+ * Gets the first or the default element of the iterable.
+ */
+export async function getFirstOrDefaultItem(iterable, defaultLanguage) {
+  const iterator = iterable[Symbol.asyncIterator]();
+  let returnItem = await iterator.next();
+
+  let item = returnItem;
+  while (!item.done) {
+    item = await iterator.next();
+    const itemLanguage = item.value?.language?.toString();
+    if (defaultLanguage && itemLanguage === defaultLanguage)
+      returnItem = item;
+  }
+
+  return returnItem.value;
+}
+
+/**
  * Creates an async iterator with the item as only element.
  */
 export function iteratorFor(item) {

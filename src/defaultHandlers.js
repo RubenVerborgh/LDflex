@@ -81,7 +81,7 @@ function handler(handle) {
 }
 
 // Creates a handler for the given RDF/JS Term property
-function termPropertyHandler(property) {
+export function termPropertyHandler(property) {
   // If a resolved subject is present,
   // behave as an RDF/JS term and synchronously expose the property;
   // otherwise, return a promise to the property value

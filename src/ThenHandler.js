@@ -1,5 +1,5 @@
 import { getThen } from './promiseUtils';
-import { getFirstItem } from './iterableUtils';
+import { getFirstOrDefaultItem } from './iterableUtils';
 
 /**
  * Thenable handler that resolves to either the subject
@@ -11,7 +11,9 @@ import { getFirstItem } from './iterableUtils';
  *  - (optional) results on the path proxy
  */
 export default class ThenHandler {
-  handle({ subject }, pathProxy) {
+  handle({ subject, settings }, pathProxy) {
+    const defaultLanguage = settings?.context?.['@language'];
+
     // Resolve to either the subject (zero-length path) or the first result
     return subject ?
       // If the subject is not a promise, it has already been resolved;
@@ -19,6 +21,6 @@ export default class ThenHandler {
       // This avoids infinite `then` chains when `await`ing this path.
       subject.then && getThen(() => pathProxy.subject) :
       // Otherwise, return the first result of this path
-      getThen(() => getFirstItem(pathProxy.results));
+      getThen(() => getFirstOrDefaultItem(pathProxy.results, defaultLanguage));
   }
 }

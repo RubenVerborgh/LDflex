@@ -10,12 +10,23 @@ export function createQueryEngine(variableNames, results) {
     variableNames = ['?value'];
   }
   return {
-    execute: jest.fn(async function*() {
-      for (let result of results) {
-        if (!Array.isArray(result))
-          result = [result];
-        const bindings = variableNames.map((name, i) => [name, result[i]]);
+    execute: jest.fn(async function*(query) {
+      const regex = new RegExp('FILTER \\(lang\\(\\?result\\) = \'([a-z]*)\'\\)');
+      const matches = query.match(regex);
+
+      if (matches && matches.length && matches[1]) {
+        const language = matches[1];
+        const languageResult = results.filter(result => result.language === language);
+        const bindings = variableNames.map((name, i) => [name, languageResult[i]]);
         yield new Map(bindings);
+      }
+      else {
+        for (let result of results) {
+          if (!Array.isArray(result))
+            result = [result];
+          const bindings = variableNames.map((name, i) => [name, result[i]]);
+          yield new Map(bindings);
+        }
       }
     }),
   };

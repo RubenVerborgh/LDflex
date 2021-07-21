@@ -3,6 +3,7 @@ import PathExpressionHandler from '../../src/PathExpressionHandler';
 import InsertFunctionHandler from '../../src/InsertFunctionHandler';
 import DeleteFunctionHandler from '../../src/DeleteFunctionHandler';
 import MutationExpressionsHandler from '../../src/MutationExpressionsHandler';
+import LanguageResolver from '../../src/LanguageResolver';
 import JSONLDResolver from '../../src/JSONLDResolver';
 import context from '../context';
 import { namedNode, literal } from '@rdfjs/data-model';
@@ -24,6 +25,7 @@ describe('a query path with a path expression handler', () => {
     },
   };
   const resolvers = [
+    new LanguageResolver(),
     new JSONLDResolver(context),
   ];
   const subject = namedNode('https://example.org/#me');

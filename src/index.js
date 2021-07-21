@@ -4,6 +4,7 @@ import DeleteFunctionHandler from './DeleteFunctionHandler';
 import ExecuteQueryHandler from './ExecuteQueryHandler';
 import InsertFunctionHandler from './InsertFunctionHandler';
 import JSONLDResolver from './JSONLDResolver';
+import LanguageResolver from './LanguageResolver';
 import MutationExpressionsHandler from './MutationExpressionsHandler';
 import MutationFunctionHandler from './MutationFunctionHandler';
 import PathExpressionHandler from './PathExpressionHandler';
@@ -34,6 +35,7 @@ export {
   ExecuteQueryHandler,
   InsertFunctionHandler,
   JSONLDResolver,
+  LanguageResolver,
   MutationExpressionsHandler,
   MutationFunctionHandler,
   PathExpressionHandler,
